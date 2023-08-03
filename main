@@ -1091,6 +1091,34 @@ Humanoid.FallingDown:connect(onFallingDown)
 Humanoid.Seated:connect(onSeated)
 
 -- main program
+local function toolcollide(t)
+local conc = game:service("RunService").Heartbeat:Connect(function()
+pcall(function()
+t.Handle.CanCollide = true
+end)
+end)
+game.Players.LocalPlayer.Backpack.ChildAdded:Connect(function(child)
+if child:IsA("Tool") and child.Name == t.Name then
+conc:Disconnect()
+end
+ game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Died:Connect(function()
+ conc:Disconnect()
+ end)
+end)
+
+end
+local oldpose
+local function onTouch()
+oldpose = pose
+pose = "Climbing"
+end
+local function onnoTouch()
+wait(1)
+pose = oldpose
+end
+
+Figure["Torso"].Touched:Connect(onTouch)
+Figure["Torso"].TouchEnded:Connect(onTouch)
 
 local nextTime = 0
 local runService = game:service("RunService");
@@ -1099,6 +1127,7 @@ if child:IsA("Tool") then
 
 toolequip.Volume = 5
 toolequip:Play()
+toolcollide(child)
 end
 end)
 while Figure.Parent~=nil do
