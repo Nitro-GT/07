@@ -1,6 +1,6 @@
-  _G.Studs = false
-  _G.OldHead = true
---script.Parent = game.Players.LocalPlayer.PlayerScripts
+
+  _G.OldBody = true
+  _G.OldSky = true
  game.Players.LocalPlayer.Character:BreakJoints()
    game.Players.LocalPlayer.Character=nil
    Connection = game.Workspace.DescendantAdded:Connect(function(c)
@@ -19,14 +19,15 @@ while true do
 end
 end
 setfpscap(30)
+setfflag("DFFlagDebugRenderForceTechnologyVoxel","True")
 
 
-
--- ANIMATION
-
--- declarations
--- Decompiled with the Synapse X Luau decompiler.
-
+if _G.OldSky == true then
+game:GetObjects("rbxassetid://339406852")[1].Parent = game.Lighting
+end
+game.Lighting.Ambient = Color3.fromRGB(255,255,255)
+game.Lighting.Brightness = 1.25
+game.Lighting.GlobalShadows = false
 function oldstud(p)
 if p:FindFirstChildOfClass("Texture") then
 for i,v in pairs(p:GetDescendants()) do
@@ -40,14 +41,11 @@ t = Instance.new("Texture")
 t.Parent = p
 t.StudsPerTileU = 1
 t.StudsPerTileV = 1
-t.Texture = "http://www.roblox.com/asset/?id=77986517"
+t.Texture = "http://www.roblox.com/asset/?id=14302274592"
 t.Face = "Top"
 t.Name = "TopStud"
 tb = Instance.new("Texture")
 tb.Parent = p
-tb.StudsPerTileV = 4
-tb.StudsPerTileU = 2
-
 tb.Texture = "http://www.roblox.com/asset/?id=48715312"
 tb.Face = "Bottom"
 tb.Name = "BottomStud"
@@ -113,6 +111,9 @@ local root = Figure.HumanoidRootPart
 pcall(function()
 Figure["Meshes/funnyface_1 (1) (1)Accessory"]:Destroy()
 end)
+pcall(function()
+Figure["Robloxclassicred"].Handle.AccessoryWeld.C0 = CFrame.new(8.65838956e-09, 0.0250000004, 0.0997277573, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+end)
 for i,v in pairs(root:GetChildren()) do
 if v:IsA("Sound") then 
 v:Destroy()
@@ -123,8 +124,8 @@ if v:IsA("Sound") then
 v:Destroy()
 end
 end
-
-q = game:GetObjects("rbxassetid://13708477942")[1]
+if _G.OldBody == true then
+local q = game:GetObjects("rbxassetid://13708477942")[1]
 for i,v in pairs(q:GetChildren()) do
 v.Parent = Figure
 end
@@ -133,7 +134,8 @@ if v:IsA("Part") then
 v.Material = Enum.Material.SmoothPlastic
 end
 end
-
+end
+Figure.Humanoid.Animator:Destroy()
 Head.Mesh.MeshId = "rbxassetid://7390281327"
 Head.face.Texture = "rbxassetid://2761533640"
 Head.face.Transparency = -0.5
@@ -928,6 +930,13 @@ function onSeated()
 	isSeated = true
 	pose = "Seated"
 end
+local oldpose
+function dance()
+oldpose = pose
+	pose = "dance"
+	wait(4.1)
+	pose = oldpose
+end
 
 
 
@@ -960,12 +969,39 @@ function moveClimb()
 end
 
 function moveSit()
-	RightShoulder.MaxVelocity = 0.15
-	LeftShoulder.MaxVelocity = 0.15
+	RightShoulder.MaxVelocity = 0.2
+	LeftShoulder.MaxVelocity = 0.2
 	RightShoulder.DesiredAngle = 3.14 /2
 	LeftShoulder.DesiredAngle = -3.14 /2
 	RightHip.DesiredAngle = 3.14 /2
 	LeftHip.DesiredAngle = -3.14 /2
+end
+function movedance()
+	RightShoulder.MaxVelocity = 0.2
+	LeftShoulder.MaxVelocity = 0.2
+	RightHip.MaxVelocity = 0.1
+	LeftHip.MaxVelocity = 0.1
+	
+	RightShoulder.DesiredAngle = 3.14 
+	LeftShoulder.DesiredAngle = 0
+	RightHip.DesiredAngle = 3.14 /2
+	LeftHip.DesiredAngle = 0
+	wait(1)
+	RightShoulder.DesiredAngle = 0
+	LeftShoulder.DesiredAngle = 3.14
+	RightHip.DesiredAngle = 0
+	LeftHip.DesiredAngle = 3.14 /2
+	wait(1)
+	RightShoulder.DesiredAngle = 3.14 
+	LeftShoulder.DesiredAngle = 0
+	RightHip.DesiredAngle = 3.14 /2
+	LeftHip.DesiredAngle = 0
+	wait(1)
+	RightShoulder.DesiredAngle = 0
+	LeftShoulder.DesiredAngle = 3.14
+	RightHip.DesiredAngle = 0
+	LeftHip.DesiredAngle = 3.14 /2
+	wait(1)
 end
 
 function getTool()
@@ -993,6 +1029,11 @@ function animateTool()
 	if (toolAnim == "Slash") then
 		RightShoulder.MaxVelocity = 0.5
 		RightShoulder.DesiredAngle = 0
+		return
+	end
+	if (toolAnim == "balloon") then
+		RightShoulder.MaxVelocity = 0.15
+		RightShoulder.DesiredAngle = 3.14
 		return
 	end
 
@@ -1032,6 +1073,11 @@ function move(time)
 		moveSit()
 		return
 	end
+	
+		if (pose == "dance") then
+		movedance()
+		return
+	end
 
 
 	RightShoulder.MaxVelocity = 0.15
@@ -1057,11 +1103,12 @@ function move(time)
 	if tool ~= nil then
 	
 		animStringValueObject = getToolAnim(tool)
-
 		if animStringValueObject ~= nil then
 			toolAnim = animStringValueObject.Value
 			-- message recieved, delete StringValue
+			if animStringValueObject.Value ~= "balloon" then
 			animStringValueObject.Parent = nil
+			end
 			toolAnimTime = time + .3
 		end
 
@@ -1089,7 +1136,11 @@ Humanoid.Climbing:connect(onClimbing)
 Humanoid.GettingUp:connect(onGettingUp)
 Humanoid.FallingDown:connect(onFallingDown)
 Humanoid.Seated:connect(onSeated)
-
+game.Players.LocalPlayer.Chatted:Connect(function(msg)
+if msg == "/e dance" then
+dance()
+end
+end)
 -- main program
 local function toolcollide(t)
 local conc = game:service("RunService").Heartbeat:Connect(function()
@@ -1108,23 +1159,18 @@ end)
 
 end
 local oldpose
-local function onTouch()
-oldpose = pose
-pose = "Climbing"
-end
-local function onnoTouch()
-wait(1)
-pose = oldpose
-end
-
-Figure["Torso"].Touched:Connect(onTouch)
-Figure["Torso"].TouchEnded:Connect(onTouch)
-
 local nextTime = 0
 local runService = game:service("RunService");
 Figure.ChildAdded:Connect(function(child)
 if child:IsA("Tool") then
-
+if child.Name == "GreenBalloon" then
+pcall(function()
+child.toolanim:Destroy()
+end)
+local z = Instance.new("StringValue",child)
+z.Name = "toolanim"
+z.Value = "balloon"
+end
 toolequip.Volume = 5
 toolequip:Play()
 toolcollide(child)
