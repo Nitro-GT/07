@@ -1,4 +1,3 @@
-
   _G.OldBody = true
   _G.OldSky = true
  game.Players.LocalPlayer.Character:BreakJoints()
@@ -25,8 +24,11 @@ setfflag("DFFlagDebugRenderForceTechnologyVoxel","True")
 if _G.OldSky == true then
 game:GetObjects("rbxassetid://339406852")[1].Parent = game.Lighting
 end
-game.Lighting.Ambient = Color3.fromRGB(255,255,255)
-game.Lighting.Brightness = 1.25
+game.Lighting.Ambient = Color3.fromRGB(122,148,120)
+game.Lighting.OutdoorAmbient = Color3.fromRGB(122,148,120)
+game.Lighting.ColorShift_Bottom = Color3.fromRGB(122,148,120)
+game.Lighting.ColorShift_Top = Color3.fromRGB(223,222,231)
+game.Lighting.Brightness = 1
 game.Lighting.GlobalShadows = false
 function oldstud(p)
 if p:FindFirstChildOfClass("Texture") then
@@ -39,20 +41,22 @@ end
 p.Material = Enum.Material.SmoothPlastic
 t = Instance.new("Texture")
 t.Parent = p
-t.StudsPerTileU = 1
-t.StudsPerTileV = 1
-t.Texture = "http://www.roblox.com/asset/?id=14302274592"
+t.StudsPerTileU = 2
+t.StudsPerTileV = 4
+t.Transparency = .3
+t.Texture = "http://www.roblox.com/asset/?id=162248765"
 t.Face = "Top"
 t.Name = "TopStud"
 tb = Instance.new("Texture")
 tb.Parent = p
-tb.Texture = "http://www.roblox.com/asset/?id=48715312"
+tb.Texture = "http://www.roblox.com/asset/?id=1068388840"
 tb.Face = "Bottom"
 tb.Name = "BottomStud"
+tb.Transparency = .3
 p.TopSurface = "Smooth"
 p.BottomSurface = "Smooth"
-tb.StudsPerTileV = 1
-tb.StudsPerTileU = 1
+tb.StudsPerTileV = 2
+tb.StudsPerTileU = 4
 end
 
 p = workspace:GetChildren()
