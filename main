@@ -1,7 +1,71 @@
+ --[[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⢂⠀⡁⠌⠨⠨⠨⠨⡐⡐⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢐⠈⢄⠀⣀⡂⠅⢅⠣⡑⢅⢣⢣⢣⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠡⢹⠀⢸⠇⢌⠢⡑⡜⡸⡨⡪⡢⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠨⠨⠠⠈⠄⡊⢔⢡⢱⢘⢌⢎⢎⢆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠨⢐⠡⢈⢂⢊⡢⡱⡸⡘⡜⡜⡜⡢⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠨⠐⣧⢁⢊⡶⡣⡱⡸⡸⡸⡸⡸⡊⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢄⠄⡂⡂⡂⡂⡂⣢⡢⡦⣲⡲⣕⢅⡪⡳⡻⡡⡣⡣⡣⡣⣣⢳⢹⢢⡠⣠⡠⣀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⡂⠕⡐⡡⠨⢂⢊⢼⡺⡽⣕⡯⣞⡗⣗⡵⡵⣕⣗⢗⣽⡺⡮⣏⢯⡳⣝⡎⡋⠔⡐⡨⠨⠨⡠⠡⢂⢂⢂⠢⢂⢢⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢌⠌⡢⠨⡨⢂⠢⢱⠫⢯⠺⣺⢵⡫⣗⡽⣝⣞⢮⣻⣪⢾⢝⣞⡽⣝⡵⡇⢌⠌⡂⡢⢑⠡⡂⢅⠅⡂⡢⢑⢐⢅⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢐⠡⡂⠕⡠⢑⠨⢸⣐⢝⡸⡁⡥⢨⠲⡩⢊⢾⢝⣞⢮⢯⣫⢞⣞⡵⣫⠇⡢⢑⢐⠌⡂⢅⠊⢔⠨⢂⠌⡂⡢⠃⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⡑⡐⠅⡊⠔⡡⢑⢗⡯⡾⣝⢾⢕⡷⡵⡽⣹⡳⡽⡵⣫⢾⢝⡮⡯⣳⢑⢐⠡⡂⢅⢊⠄⠕⡡⠨⢂⠊⢔⠸⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠢⡊⠌⡂⠕⡠⠡⣻⡺⣝⡮⡯⡯⣞⡽⡽⣕⡯⣏⡯⣳⣫⢯⣞⡽⡽⡐⠡⡊⡰⠐⢔⠡⡑⡐⢅⠑⢌⠂⡇⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢑⢐⠅⡊⠌⠔⡁⡷⡽⡵⣫⢯⢞⡵⡯⣞⡵⡯⣺⢽⢕⣗⢯⢞⡮⡯⡂⠕⡐⠔⡡⠡⡂⡢⠊⢄⠅⠕⡨⡂⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢐⠡⢂⠪⠨⢊⠄⢝⣞⡽⣵⡫⣟⣞⢽⣺⡺⡽⡵⣫⢟⡮⡯⡯⣞⣇⠪⡈⡢⢑⠨⢂⠢⡂⠕⡡⠨⡨⡸⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡪⢐⠡⡡⠡⢊⢜⡮⣯⣺⡺⡵⣳⣫⢞⣞⡽⡽⡵⣻⣪⢟⡮⣗⡵⢈⢂⠢⡑⡨⢂⠅⡢⢑⢐⠡⠂⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠁⠊⠠⠑⠡⢸⢮⣳⢵⣫⢯⣳⢽⢝⣞⢮⣻⡺⡵⣳⢯⢞⣵⡣⠡⠢⡑⡐⡐⠅⢌⠔⡁⡢⠡⢱⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢕⢱⢙⢎⢗⠷⡽⣝⡮⡯⣞⣞⡽⡵⣫⢯⢞⠎⢌⠢⡂⠕⡨⠨⡂⢌⢂⠢⠡⡱⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢅⢣⢊⠆⡕⡑⡌⡆⢭⢙⠎⡞⢞⡝⣗⢯⢯⠣⠡⡂⠪⡐⢌⢂⢊⠔⡐⡡⠡⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠡⡃⡎⢜⠔⡅⡣⡊⢆⢣⠱⡸⡐⡕⢜⢌⢍⢧⡱⡌⠌⢂⠢⡂⢅⠢⢂⢊⠜⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠨⢪⢘⠔⡕⢜⠰⡑⡅⢇⠕⡜⡰⡡⡃⢎⢢⢳⢕⡅⠀⠀⠀⠀⠁⠈⠂⠂⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠨⡊⡆⡣⢪⢊⢪⢘⢌⠆⡇⡕⡌⢆⢣⠱⡑⡵⡳⡅⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢕⠜⡌⢎⠜⡌⡪⠢⡣⡱⡨⡊⢎⢢⢃⢇⢯⢺⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢕⢱⠸⡘⡌⢎⠜⡜⢔⢱⠨⡊⢎⢢⠣⡪⡳⣕⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠐⠑⠱⢸⢘⢌⢎⠜⡔⢕⢱⢑⢅⢣⢱⢝⠌⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠐⠁⠣⠪⡊⡆⡣⡱⢡⠳⠍⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠈⠈⠪⠸⡘⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+]]
   _G.OldBody = true
   _G.OldSky = true
+  local pr
+function prompt(t,b,bt1,bt2)
+pr = nil
+local pb = game:GetService("CoreGui").RobloxGui.PopupFrame
+pb.Visible = true
+pb.PopupText.Text = t
+pb.PopupText.Position = UDim2.new(0,8,0,-8)
+local pt2 = pb.PopupText:Clone()
+pt2.Parent = pb
+pt2.TextSize = 24
+pt2.Position = UDim2.new(0,8,0,30)
+pt2.Text = b
+pb.PopupAcceptButton.Text = bt1
+pb.PopupDeclineButton.Text = bt2
+local db = pb.PopupDeclineButton
+local ab = pb.PopupAcceptButton
+db.MouseButton1Click:Connect(function(click)
+pb.Visible = false
+pt2:Destroy()
+pr = false
+end)
+ab.MouseButton1Click:Connect(function(click)
+pb.Visible = false
+pt2:Destroy()
+pr = true
+end)
+end
+prompt("Run Script","Do you want to run this?","yeah","no")
+repeat task.wait() until pr == true or pr == false
+if pr == false then
+print("declined")
+else
+settings().Rendering.QualityLevel = 2
  game.Players.LocalPlayer.Character:BreakJoints()
-   game.Players.LocalPlayer.Character=nil
    Connection = game.Workspace.DescendantAdded:Connect(function(c)
        if c.Name == "Animate" then
            c.Disabled=true    
@@ -55,11 +119,11 @@ tb.Name = "BottomStud"
 tb.Transparency = .3
 p.TopSurface = "Smooth"
 p.BottomSurface = "Smooth"
-tb.StudsPerTileV = 2
-tb.StudsPerTileU = 4
+tb.StudsPerTileU = 2
+tb.StudsPerTileV = 4
 end
 
-p = workspace:GetChildren()
+p = workspace:GetDescendants()
 for i = 1,#p do
 if p[i].className == "Part" then
 
@@ -199,15 +263,18 @@ sRunning:pause()
 	end
 end
 
+local hasfell = false
 function onSJ(state, sound)
 sRunning:pause()
 	if state then
 		sound:Play()
+		hasfell = false
 	else
 wait(.15)
 		sound:Pause()
 	end
 end
+
 
 function onSGU(state, sound)
 sRunning:pause()
@@ -218,17 +285,13 @@ sRunning:pause()
 		sound:Pause()
 	end
 end
-
-
 function onSFF(state, sound)
 sRunning:pause()
-wait(2)
-if Humanoid.FreeFalling == true then
-	if state then
+	if state and hasfell == false then
 		sound:Play()
+		hasfell = true
 	else
 		sound:Pause()
-	end
 end
 end
 
@@ -1096,10 +1159,10 @@ function move(time)
 
 	desiredAngle = amplitude * math.sin(time*frequency)
 
-	RightShoulder.DesiredAngle = desiredAngle
-	LeftShoulder.DesiredAngle = desiredAngle
-	RightHip.DesiredAngle = -desiredAngle
-	LeftHip.DesiredAngle = -desiredAngle
+	RightShoulder:SetDesiredAngle(desiredAngle)
+	LeftShoulder:SetDesiredAngle(desiredAngle)
+	RightHip:SetDesiredAngle(-desiredAngle)
+	LeftHip:SetDesiredAngle(-desiredAngle)
 
 
 	local tool = getTool()
@@ -1188,3 +1251,4 @@ while Figure.Parent~=nil do
 	end
 end
 end)
+end
