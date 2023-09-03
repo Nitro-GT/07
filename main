@@ -1,4 +1,5 @@
- --[[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+--_G.Bevels  WARNING: This is buggy and may cause issues with rendering, 2008 Only, Forces DescendantAdded
+--[[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⢂⠀⡁⠌⠨⠨⠨⠨⡐⡐⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢐⠈⢄⠀⣀⡂⠅⢅⠣⡑⢅⢣⢣⢣⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠡⢹⠀⢸⠇⢌⠢⡑⡜⡸⡨⡪⡢⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -30,10 +31,13 @@
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ]]
+repeat task.wait() until game:IsLoaded()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Nitro-GT/autoexec/main/prompt.txt"))()
+
   _G.OldBody = true
   _G.OldSky = true
-
-prompt("Run Script","Which Year?","2007","2008")
+  _G.DescendantAdded = true
+prompt("Which Year?","Which year would you like to simulate?","2007","2008",_G.pr)
 
 repeat task.wait() until _G.pr == true or _G.pr == false
 if _G.OldSky == true then
@@ -45,6 +49,7 @@ game.Lighting.ColorShift_Bottom = Color3.fromRGB(122,148,120)
 game.Lighting.ColorShift_Top = Color3.fromRGB(223,222,231)
 game.Lighting.Brightness = 1
 game.Lighting.GlobalShadows = false
+
 if _G.pr == true then
 settings().Rendering.QualityLevel = 2
  game.Players.LocalPlayer.Character:BreakJoints()
@@ -98,8 +103,7 @@ end
 
 p = workspace:GetDescendants()
 for i = 1,#p do
-if p[i].className == "Part" then
-
+if p[i].className == "Part" and p[i].Parent.ClassName ~= "Accessory" then
 if p[i].Transparency < 1 then
 oldstud(p[i])
 end
@@ -123,13 +127,15 @@ end
 end
 end
 end
+if _G.DescendantAdded == true then
 workspace.DescendantAdded:Connect(function(d)
-if d.className == "Part" and d.Parent.ClassName~= "Accessory" and d.Parent ~= game.Players.LocalPlayer.Character then
+if d.className == "Part" and d.Parent.ClassName ~= "Accessory" and d.Parent ~= game.Players.LocalPlayer.Character then
 if d.Transparency < 1 then
 oldstud(d)
 end
 end
 end)
+end
 local plr =game.Players.LocalPlayer
 plr.CharacterAdded:Connect(function()
 wait(.5)
@@ -1265,6 +1271,13 @@ else
 ]]
 
 settings().Rendering.QualityLevel = 2
+prompt("Bevels?","May Cause Issues","Yes","No")
+repeat task.wait() until _G.pr == true or _G.pr == false
+if _G.pr == true then
+_G.Bevels = true
+else
+_G.Bevels = false
+end
  game.Players.LocalPlayer.Character:BreakJoints()
    Connection = game.Workspace.DescendantAdded:Connect(function(c)
        if c.Name == "Animate" then
@@ -1293,7 +1306,9 @@ game.Lighting.ColorShift_Bottom = Color3.fromRGB(122,148,120)
 game.Lighting.ColorShift_Top = Color3.fromRGB(223,222,231)
 game.Lighting.Brightness = 1
 game.Lighting.GlobalShadows = false
-function oldstud(p)
+local oldstud
+if _G.Bevels == false then
+ oldstud = function(p)
 if p:FindFirstChildOfClass("Texture") then
 for i,v in pairs(p:GetDescendants()) do
 if v:IsA("Texture") then
@@ -1348,14 +1363,157 @@ end
 end
 end
 end
-
+if _G.DescendantAdded == true then
 workspace.DescendantAdded:Connect(function(d)
 if d.className == "Part" and d.Parent.ClassName~= "Accessory" and d.Parent ~= game.Players.LocalPlayer.Character then
+if d.Transparency ~= 1 then
+oldstud(d)
+end
+end
+end)
+end
+else
+
+ oldstud = function(v)
+if v:FindFirstChild("StudPart") then
+ v:FindFirstChild("StudPart"):Destroy()
+ end
+ if  v.Name ~= "StudPart" then
+local p = v:Clone()
+p.Name = "StudPart"
+p.CanCollide = false
+p.CFrame = p.CFrame * CFrame.new(0,0.025,0)
+p.Parent = v
+local w = Instance.new("Weld",p)
+w.Part0 = v
+w.Part1 = p
+p.Transparency = 1
+if p:FindFirstChildOfClass("SurfaceGui") then
+p:FindFirstChildOfClass("SurfaceGui"):Destroy()
+end
+if p:FindFirstChild("StudPart") then
+ p:FindFirstChild("StudPart"):Destroy()
+ end
+if p:FindFirstChildOfClass("Texture") then
+for i,v in pairs(p:GetDescendants()) do
+if v:IsA("Texture") then
+v:Destroy()
+end
+end
+end
+if p:FindFirstChildOfClass("SpecialMesh") then
+p:FindFirstChildOfClass("SpecialMesh"):Destroy()
+end
+p.Material = Enum.Material.SmoothPlastic
+t = Instance.new("Texture")
+t.Parent = p
+t.StudsPerTileU = 2
+t.StudsPerTileV = 4
+t.Transparency = .3
+t.Texture = "http://www.roblox.com/asset/?id=162248765"
+t.Face = "Top"
+t.Name = "TopStud"
+tb = Instance.new("Texture")
+tb.Parent = p
+tb.Texture = "http://www.roblox.com/asset/?id=1068388840"
+tb.Face = "Bottom"
+tb.Name = "BottomStud"
+tb.Transparency = .3
+p.TopSurface = "Smooth"
+p.BottomSurface = "Smooth"
+tb.StudsPerTileU = 2
+tb.StudsPerTileV = 4
+end
+end
+
+p = workspace:GetDescendants()
+for i = 1,#p do
+if p[i].className == "Part" and p[i].Parent.ClassName ~= "Accessory" and not game.Players:FindFirstChild(p[i].Parent.Name) then
+if p[i].Transparency < 1 then
+oldstud(p[i])
+end
+end
+if p[i].className == "Model" then
+c = p[i]:GetChildren()
+for m = 1,#c do
+if c[m].className == "Part"  and not game.Players:FindFirstChild(c[m].Parent.Name) then
+if c[m]:FindFirstChildOfClass("Texture") then
+for i,v in pairs(c[m]:GetDescendants()) do
+if v:IsA("Texture") then
+v:Destroy()
+end
+end
+end
+if c[m].Transparency < 1 then
+c[m].Material = Enum.Material.SmoothPlastic
+oldstud(c[m])
+end
+end
+end
+end
+end
+
+workspace.DescendantAdded:Connect(function(d)
+if d.className == "Part" and d.Parent.ClassName ~= "Accessory" and d.Parent ~= game.Players.LocalPlayer.Character then
 if d.Transparency < 1 then
 oldstud(d)
 end
 end
 end)
+
+for i,v in pairs(workspace:GetDescendants()) do
+	if v:IsA("Part") then
+		if v.Parent.ClassName ~= "Accessory"  and v.Name ~= "StudPart" then
+			if v.Parent.ClassName ~= "Tool" then
+	if not game.Players:FindFirstChild(v.Parent.Name) then
+scale=.4
+scale2=.4
+b = v
+if v:FindFirstChildOfClass("SpecialMesh") then
+v.Mesh:Destroy()
+end
+Instance.new("SpecialMesh",v)
+pcall(function ()
+	v.Mesh.MeshId = "rbxassetid://95358536"
+end)
+
+if v:FindFirstChildOfClass("Decal") then
+					q = v:FindFirstChildOfClass("Decal")
+				q:Destroy()
+end 				
+b.Mesh.Scale = Vector3.new(b.Size.x*scale,b.Size.y*0.41,b.Size.z*scale2)
+		end
+		end
+	end
+	end
+end
+
+workspace.DescendantAdded:Connect(function(v)
+	if v:IsA("Part") then
+		if v.Parent.ClassName ~= "Accessory" and v.Name ~= "StudPart" then
+			if v.Parent.ClassName ~= "Tool" then
+	if not game.Players:FindFirstChild(v.Parent.Name) then
+scale=.505
+scale2=1.0
+b = v
+if v:FindFirstChildOfClass("SpecialMesh") then
+v.Mesh:Destroy()
+end
+Instance.new("SpecialMesh",v)
+pcall(function ()
+	v.Mesh.MeshId = "rbxasset://fonts/torso.mesh"
+end)
+if v:FindFirstChildOfClass("Decal") then
+					q = v:FindFirstChildOfClass("Decal")
+				q:Destroy()
+end 				
+b.Mesh.Scale = Vector3.new(b.Size.x*scale,b.Size.y*0.501,b.Size.z*scale2)
+		end
+		end
+	end
+	end
+	end)
+	end
 local plr =game.Players.LocalPlayer
 plr.CharacterAdded:Connect(function()
 wait(.5)
@@ -2085,7 +2243,7 @@ end
 local q = nil
 local lastq = getDigit((head.CFrame.p - camera.CFrame.p).magnitude,2)..getDigit((head.CFrame.p - camera.CFrame.p).magnitude,1)
 local gaymen = game:GetService("RunService").Heartbeat:Connect(function()
-				Root.CFrame *= CFrame.new(0, 0.0001, 0)
+				Root.CFrame *= CFrame.new(0, 0.0005, 0)
 				if Figure.Humanoid.HipHeight >= 2 then
 					Figure.Humanoid.HipHeight = 0
 				end
