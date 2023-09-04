@@ -952,6 +952,23 @@ if isSeated then return end
 			pose = "Standing"
 	end
 end
+local lastpose
+function onFF(speed)
+if isSeated then return end
+if lastpose == "Jump" then return end
+
+repeat 
+wait()
+	if Humanoid.MoveDirection ~= Vector3.new(0,0,0) and  lastpose ~= "Jump" then  
+		pose = "Running"
+	elseif Humanoid.MoveDirection == Vector3.new(0,0,0) and  lastpose ~= "Jump" then 
+		pose = "Standing"
+		else
+			pose = "Jumping"
+	end
+	until game.Players.LocalPlayer.Character.Humanoid.FreeFalling == false
+	lastpose = "fall"
+end
 
 function onDied()
 	pose = "Dead"
@@ -960,6 +977,7 @@ end
 function onJumping()
 	isSeated = false
 	pose = "Jumping"
+	lastpose = "Jump"
 end
 
 function onClimbing()
@@ -1000,6 +1018,7 @@ function moveJump()
 	LeftShoulder.DesiredAngle = -3.14
 	RightHip.DesiredAngle = 0
 	LeftHip.DesiredAngle = 0
+	lastpose = "Jump"
 end
 
 function moveFreeFall()
@@ -1185,6 +1204,7 @@ end
 Humanoid.Died:connect(onDied)
 Humanoid.Running:connect(onRunning)
 Humanoid.Jumping:connect(onJumping)
+Humanoid.FreeFalling:connect(onFF)
 Humanoid.Climbing:connect(onClimbing)
 Humanoid.GettingUp:connect(onGettingUp)
 Humanoid.FallingDown:connect(onFallingDown)
