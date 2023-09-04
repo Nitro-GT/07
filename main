@@ -1,4 +1,4 @@
-
+--_G.Bevels  WARNING: This is buggy and may cause issues with rendering, 2008 Only, Forces DescendantAdded
 --[[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⢂⠀⡁⠌⠨⠨⠨⠨⡐⡐⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢐⠈⢄⠀⣀⡂⠅⢅⠣⡑⢅⢣⢣⢣⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -1485,7 +1485,7 @@ end)
 
 for i,v in pairs(workspace:GetDescendants()) do
 	if v:IsA("Part") then
-		if v.Parent.ClassName ~= "Accessory"  and v.Name ~= "StudPart" then
+		if v.Parent.ClassName ~= "Accessory"  and v.Name ~= "StudPart" and v.Shape == Enum.PartType.Block then
 			if v.Parent.ClassName ~= "Tool" then
 	if not game.Players:FindFirstChild(v.Parent.Name) then
 scale=.505
@@ -1512,7 +1512,7 @@ end
 
 workspace.DescendantAdded:Connect(function(v)
 	if v:IsA("Part") then
-		if v.Parent.ClassName ~= "Accessory" and v.Name ~= "StudPart" then
+		if v.Parent.ClassName ~= "Accessory" and v.Name ~= "StudPart"  and v.Shape == Enum.PartType.Block then
 			if v.Parent.ClassName ~= "Tool" then
 	if not game.Players:FindFirstChild(v.Parent.Name) then
 scale=.505
