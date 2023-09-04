@@ -1,3 +1,4 @@
+--_G.Bevels  WARNING: This is buggy and may cause issues with rendering, 2008 Only, Forces DescendantAdded
 --[[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⢂⠀⡁⠌⠨⠨⠨⠨⡐⡐⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢐⠈⢄⠀⣀⡂⠅⢅⠣⡑⢅⢣⢣⢣⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -37,7 +38,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Nitro-GT/autoexec/mai
   _G.OldSky = true
   _G.DescendantAdded = true
 prompt("Which Year?","Which year would you like to simulate?","2007","2008",_G.pr)
-
+local BoomFolder = Instance.new("Folder",workspace)
 repeat task.wait() until _G.pr == true or _G.pr == false
 if _G.OldSky == true then
 game:GetObjects("rbxassetid://339406852")[1].Parent = game.Lighting
@@ -102,7 +103,7 @@ end
 
 p = workspace:GetDescendants()
 for i = 1,#p do
-if p[i].className == "Part" and p[i].Parent.ClassName ~= "Accessory" then
+if p[i].className == "Part" and p[i].Name ~= "ExplosionPart" and p[i].Parent.ClassName ~= "Accessory" then
 if p[i].Transparency < 1 then
 oldstud(p[i])
 end
@@ -128,7 +129,7 @@ end
 end
 if _G.DescendantAdded == true then
 workspace.DescendantAdded:Connect(function(d)
-if d.className == "Part" and d.Parent.ClassName ~= "Accessory" and d.Parent ~= game.Players.LocalPlayer.Character then
+if d.className == "Part" and d.Parent.ClassName ~= "Accessory"  and d.Parent.className ~= "Tool" and d.Name ~= "ExplosionPart" and d.Parent ~= BoomFolder  and d.Parent ~= game.Players.LocalPlayer.Character then
 if d.Transparency < 1 then
 oldstud(d)
 end
@@ -892,7 +893,8 @@ Died = game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Died:Connect(
 		if item.Visible == false then return end
 		item.Visible = false
 		wait()
-		local EffectPart = Instance.new("Part",workspace)
+		local EffectPart = Instance.new("Part",BoomFolder)
+		EffectPart.Name = "ExplosionPart"
 		EffectPart.Size = Vector3.new(0.125,0.125,0.125)
 		EffectPart.CanCollide = false
 		EffectPart.Anchored = true
@@ -1364,7 +1366,7 @@ end
 end
 if _G.DescendantAdded == true then
 workspace.DescendantAdded:Connect(function(d)
-if d.className == "Part" and d.Parent.ClassName~= "Accessory" and d.Parent ~= game.Players.LocalPlayer.Character then
+if d.className == "Part" and d.Parent.ClassName~= "Accessory" and d.Parent.className ~= "Tool" and d.Name ~= "ExplosionPart" and d.Parent ~= BoomFolder  and d.Parent ~= game.Players.LocalPlayer.Character then
 if d.Transparency ~= 1 then
 oldstud(d)
 end
@@ -1407,7 +1409,7 @@ p.Material = Enum.Material.SmoothPlastic
 t = Instance.new("Texture")
 t.Parent = p
 t.StudsPerTileU = 2
-t.StudsPerTileV = 4ss
+t.StudsPerTileV = 4
 t.Transparency = .3
 t.Texture = "http://www.roblox.com/asset/?id=162248765"
 t.Face = "Top"
@@ -1453,7 +1455,7 @@ end
 end
 
 workspace.DescendantAdded:Connect(function(d)
-if d.className == "Part" and d.Parent.ClassName ~= "Accessory" and d.Parent ~= game.Players.LocalPlayer.Character then
+if d.className == "Part" and d.Parent.className ~= "Tool" and d.Name ~= "ExplosionPart" and d.Parent ~= BoomFolder and d.Parent.ClassName ~= "Accessory" and d.Parent ~= game.Players.LocalPlayer.Character then
 if d.Transparency < 1 then
 oldstud(d)
 end
@@ -2261,7 +2263,8 @@ Died = game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Died:Connect(
 		if item.Visible == false then return end
 		item.Visible = false
 		wait()
-		local EffectPart = Instance.new("Part",workspace)
+		local EffectPart = Instance.new("Part",BoomFolder)
+		EffectPart.Name = "ExplosionPart"
 		EffectPart.Size = Vector3.new(0.125,0.125,0.125)
 		EffectPart.CanCollide = false
 		EffectPart.Anchored = true
