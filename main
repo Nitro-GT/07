@@ -954,21 +954,25 @@ if isSeated then return end
 end
 local lastpose
 function onFF(speed)
-if isSeated then return end
-if lastpose == "Jump" then return end
-
-repeat 
-wait()
-	if Humanoid.MoveDirection ~= Vector3.new(0,0,0) and  lastpose ~= "Jump" then  
-		pose = "Running"
-	elseif Humanoid.MoveDirection == Vector3.new(0,0,0) and  lastpose ~= "Jump" then 
-		pose = "Standing"
-		else
-			pose = "Jumping"
-	end
-	until game.Players.LocalPlayer.Character.Humanoid.FreeFalling == false
-	lastpose = "fall"
+	if isSeated then return end
+	print(lastpose)
+	pcall(function()
+		repeat
+			task.wait() 
+			if Humanoid.MoveDirection ~= Vector3.new(0,0,0) and lastpose ~= "Jump" then  
+				pose = "Running"
+			elseif Humanoid.MoveDirection == Vector3.new(0,0,0) and lastpose ~= "Jump" then 
+				pose = "Standing"
+			elseif  lastpose == "Jump" then
+				pose = "Jumping"
+			end
+			if lastpose ~= "Jump" then
+				lastpose = "fall"
+			end
+		until lastpose == "Idle"
+	end)
 end
+
 
 function onDied()
 	pose = "Dead"
@@ -1128,11 +1132,6 @@ function move(time)
 
 	if (pose == "Jumping") then
 		moveJump()
-		return
-	end
-
-	if (pose == "FreeFall") then
-	 moveJump()
 		return
 	end
 
@@ -2333,6 +2332,27 @@ local toolAnimTime = 0
 local jumpMaxLimbVelocity = 0.75
 
 -- functions
+local lastpose
+function onFF(speed)
+	if isSeated then return end
+	print(lastpose)
+	pcall(function()
+		repeat
+			task.wait() 
+			if Humanoid.MoveDirection ~= Vector3.new(0,0,0) and lastpose ~= "Jump" then  
+				pose = "Running"
+			elseif Humanoid.MoveDirection == Vector3.new(0,0,0) and lastpose ~= "Jump" then 
+				pose = "Standing"
+			elseif  lastpose == "Jump" then
+				pose = "Jumping"
+			end
+			if lastpose ~= "Jump" then
+				lastpose = "fall"
+			end
+		until lastpose == "Idle"
+	end)
+end
+
 
 function onRunning(speed)
 if speed>0 and Humanoid.MoveDirection ~= Vector3.new(0,0,0) then
