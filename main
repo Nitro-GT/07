@@ -941,18 +941,34 @@ local toolAnimTime = 0
 
 local isSeated = false
 
--- functions
+local isrunning = false
 function onRunning(speed)
-if isSeated then return end
-	if speed>0 and Humanoid.MoveDirection ~= Vector3.new(0,0,0) then
+	if isSeated then return end
+	lastpose = "Idle"
+	runnoclick = true
+	if speed == nil then speed = 1 end
+	if  (Figure.HumanoidRootPart.Velocity*Vector3.new(1, 0, 1)).Magnitude >= 10 and Humanoid.Jump == false and Humanoid:GetState() ~= Enum.HumanoidStateType.Landed  then
 		pose = "Running"
-	elseif Humanoid.MoveDirection == Vector3.new(0,0,0) then
+		isrunning = true
+		Figure.Climbing.Size = Vector3.new(3.075, 4.695, 1)
+	elseif  0 <= Figure.HumanoidRootPart.Velocity.Magnitude and (Figure.HumanoidRootPart.Velocity*Vector3.new(1, 0, 1)).Magnitude <= 0.5 and Humanoid.Jump == false then
 		pose = "Standing"
-		else
-			pose = "Standing"
+		lastpose = "Idle"
+		isrunning = false
+
+		Figure.Climbing.Size = Vector3.new(3.075, 4.695, 0.461)
+	elseif  Humanoid.Jump == true then
+		pose = "Jumping"
 	end
 end
-local lastpose
+
+_G.onClick = function()
+	clpjumpd = false
+end
+
+
+
+
 function onFF(speed)
 	if isSeated then return end
 	print(lastpose)
@@ -973,7 +989,6 @@ function onFF(speed)
 	end)
 end
 
-
 function onDied()
 	pose = "Dead"
 end
@@ -982,6 +997,7 @@ function onJumping()
 	isSeated = false
 	pose = "Jumping"
 	lastpose = "Jump"
+	Figure.Climbing.Size = Vector3.new(3.075, 4.695, 0.461)
 end
 
 function onClimbing()
@@ -993,7 +1009,7 @@ function onGettingUp()
 end
 
 function onFreeFall()
-wait(.1)
+	wait(.1)
 	pose = "FreeFall"
 end
 
@@ -1004,10 +1020,12 @@ end
 function onSeated()
 	isSeated = true
 	pose = "Seated"
+	Figure.Climbing.Size = Vector3.new(3.075, 0.1, 1)
 end
 local oldpose
 function dance()
-oldpose = pose
+	print("h")
+	oldpose = pose
 	pose = "dance"
 	wait(4.1)
 	pose = oldpose
@@ -1018,99 +1036,126 @@ end
 function moveJump()
 	RightShoulder.MaxVelocity = 0.5
 	LeftShoulder.MaxVelocity = 0.5
-	RightShoulder.DesiredAngle = 3.14
-	LeftShoulder.DesiredAngle = -3.14
-	RightHip.DesiredAngle = 0
-	LeftHip.DesiredAngle = 0
+	if enabled == false then
+		RightShoulder.DesiredAngle = 3.14
+		LeftShoulder.DesiredAngle = -3.14
+
+		RightHip.DesiredAngle = 0
+		LeftHip.DesiredAngle = 0
+	end
 	lastpose = "Jump"
 end
 
-function moveFreeFall()
-	RightShoulder.MaxVelocity = 0.5
-	LeftShoulder.MaxVelocity = 0.5
-	RightShoulder.DesiredAngle = 1
-	LeftShoulder.DesiredAngle = -1
-	RightHip.DesiredAngle = 0
-	LeftHip.DesiredAngle = 0
-end
 
 
 function moveClimb()
-	RightShoulder.MaxVelocity = 0.5
-	LeftShoulder.MaxVelocity = 0.5
-	RightShoulder.DesiredAngle = -3.14
-	LeftShoulder.DesiredAngle = 3.14
-	RightHip.DesiredAngle = 0
-	LeftHip.DesiredAngle = 0
+	RightShoulder.MaxVelocity = 0.25
+	LeftShoulder.MaxVelocity = 0.25
+	if enabled == false then
+		RightShoulder.DesiredAngle = -3.14
+		LeftShoulder.DesiredAngle = 3.14
+
+		RightHip.DesiredAngle = 0
+		LeftHip.DesiredAngle = 0
+	end
 end
+
 
 function moveSit()
 	RightShoulder.MaxVelocity = 0.2
 	LeftShoulder.MaxVelocity = 0.2
-	RightShoulder.DesiredAngle = 3.14 /2
-	LeftShoulder.DesiredAngle = -3.14 /2
-	RightHip.DesiredAngle = 3.14 /2
-	LeftHip.DesiredAngle = -3.14 /2
+	if enabled == false then
+		RightShoulder.DesiredAngle = 3.14 /2
+		LeftShoulder.DesiredAngle = -3.14 /2
+		RightHip.DesiredAngle = 3.14 /2
+		LeftHip.DesiredAngle = -3.14 /2
+	end
 end
+local hasran = false
 function movedance()
-	RightShoulder.MaxVelocity = 0.2
-	LeftShoulder.MaxVelocity = 0.2
-	RightHip.MaxVelocity = 0.1
-	LeftHip.MaxVelocity = 0.1
-	
-	RightShoulder.DesiredAngle = 3.14 
-	LeftShoulder.DesiredAngle = 0
-	RightHip.DesiredAngle = 3.14 /2
-	LeftHip.DesiredAngle = 0
-	wait(1)
-	RightShoulder.DesiredAngle = 0
-	LeftShoulder.DesiredAngle = 3.14
-	RightHip.DesiredAngle = 0
-	LeftHip.DesiredAngle = 3.14 /2
-	wait(1)
-	RightShoulder.DesiredAngle = 3.14 
-	LeftShoulder.DesiredAngle = 0
-	RightHip.DesiredAngle = 3.14 /2
-	LeftHip.DesiredAngle = 0
-	wait(1)
-	RightShoulder.DesiredAngle = 0
-	LeftShoulder.DesiredAngle = 3.14
-	RightHip.DesiredAngle = 0
-	LeftHip.DesiredAngle = 3.14 /2
-	wait(1)
+	repeat 
+		if isrunning == false then
+			RightShoulder.MaxVelocity = 0.2
+			LeftShoulder.MaxVelocity = 0.2
+			RightHip.MaxVelocity = 0.1
+			LeftHip.MaxVelocity = 0.1
+			RightShoulder.DesiredAngle = 3.14 
+			LeftShoulder.DesiredAngle = 0
+			RightHip.DesiredAngle = 3.14 /2
+			LeftHip.DesiredAngle = 0
+			if hasran == true then
+				return
+			end
+			if isrunning == false then
+				wait(1)
+				if hasran == true then
+					return
+				end
+				RightShoulder.DesiredAngle = 0
+				LeftShoulder.DesiredAngle = 3.14
+				RightHip.DesiredAngle = 0
+				LeftHip.DesiredAngle = 3.14 /2
+				if isrunning == false then
+					wait(1)
+					if hasran == true then
+						return
+					end
+					RightShoulder.DesiredAngle = 3.14 
+					LeftShoulder.DesiredAngle = 0
+					RightHip.DesiredAngle = 3.14 /2
+					LeftHip.DesiredAngle = 0
+					if isrunning == false then
+						wait(1)
+						if hasran == true then
+							return
+						end
+						RightShoulder.DesiredAngle = 0
+						LeftShoulder.DesiredAngle = 3.14
+						RightHip.DesiredAngle = 0
+						LeftHip.DesiredAngle = 3.14 /2
+						if isrunning == false then
+							wait(1)
+						end
+					end
+				end
+			end
+		end
+	until pose ~= "dance" or isrunning == true
 end
 
+
 function getTool()
-for _, kid in ipairs(Figure:GetChildren()) do
- if kid.className == "Tool" then return kid end
-end
-return nil
+	for _, kid in ipairs(Figure:GetChildren()) do
+		if kid.className == "Tool" then return kid end
+	end
+	return nil
 end
 
 function getToolAnim(tool)
-for _, c in ipairs(tool:GetChildren()) do
- if c.Name == "toolanim" and c.className == "StringValue" then
-  return c
- end
-end
-return nil
+	for _, c in ipairs(tool:GetChildren()) do
+		if c.Name == "toolanim" and c.className == "StringValue" then
+			return c
+		end
+	end
+	return nil
 end
 function animateTool()
-	
-	if (toolAnim == "None") then
-		RightShoulder.DesiredAngle = 1.57
-		return
-	end
+	if enabled == false then
+		if (toolAnim == "None") then
+			RightShoulder.DesiredAngle = 1.57
+			return
+		end
 
-	if (toolAnim == "Slash") then
-		RightShoulder.MaxVelocity = 0.5
-		RightShoulder.DesiredAngle = 0
-		return
-	end
-	if (toolAnim == "balloon") then
-		RightShoulder.MaxVelocity = 0.15
-		RightShoulder.DesiredAngle = 3.14
-		return
+		if (toolAnim == "Slash") then
+			RightShoulder.MaxVelocity = 0.5
+			RightShoulder.DesiredAngle = 0
+			return
+		end
+		if (toolAnim == "balloon") then
+			RightShoulder.MaxVelocity = 0.15
+			RightShoulder.DesiredAngle = 3.14
+			return
+		end
 	end
 
 	if (toolAnim == "Lunge") then
@@ -1118,14 +1163,19 @@ function animateTool()
 		LeftShoulder.MaxVelocity = 0.5
 		RightHip.MaxVelocity = 0.5
 		LeftHip.MaxVelocity = 0.5
-		RightShoulder.DesiredAngle = 1.57
-		LeftShoulder.DesiredAngle = 1.0
-		RightHip.DesiredAngle = 1.57
-		LeftHip.DesiredAngle = 1.0
+		if enabled == false then
+			RightShoulder.DesiredAngle = 1.57
+			LeftShoulder.DesiredAngle = 1.0
+
+			RightHip.DesiredAngle = 1.57
+			LeftHip.DesiredAngle = 1.0
+		end
 		return
 	end
 end
 
+
+local IsDancing = false
 function move(time)
 	local amplitude
 	local frequency
@@ -1135,7 +1185,7 @@ function move(time)
 		return
 	end
 
-	if (pose == "Climbing") then
+	if (pose == "Climbing") or script.Parent.Climbing3.Value == true then
 		moveClimb()
 		return
 	end
@@ -1144,53 +1194,56 @@ function move(time)
 		moveSit()
 		return
 	end
-	
-		if (pose == "dance") then
+
+	if pose == "dance" or IsDancing == true then
 		movedance()
 		return
 	end
 
-
-	RightShoulder.MaxVelocity = 0.15
-	LeftShoulder.MaxVelocity = 0.15
-	if (pose == "Running") then
-		amplitude = 1
-		frequency = 9
-	else
-		amplitude = 0.1
-		frequency = 1
+	RightShoulder.MaxVelocity = 0.075
+	LeftShoulder.MaxVelocity = 0.075
+	RightHip.MaxVelocity = 0.06
+	LeftHip.MaxVelocity = 0.06
+	if pose ~= "dance" then
+		if (pose == "Running")  then
+			amplitude = 1
+			frequency = 9
+		else
+			amplitude = 0.1
+			frequency = 1
+		end
 	end
-
 	desiredAngle = amplitude * math.sin(time*frequency)
-
-	RightShoulder:SetDesiredAngle(desiredAngle)
-	LeftShoulder:SetDesiredAngle(desiredAngle)
-	RightHip:SetDesiredAngle(-desiredAngle)
-	LeftHip:SetDesiredAngle(-desiredAngle)
+	if enabled == false then
+		RightShoulder:SetDesiredAngle(desiredAngle)
+		LeftShoulder:SetDesiredAngle(desiredAngle)
+		RightHip:SetDesiredAngle(-desiredAngle)
+		LeftHip:SetDesiredAngle(-desiredAngle)
+	end
 
 
 	local tool = getTool()
 
 	if tool ~= nil then
-	
-		animStringValueObject = getToolAnim(tool)
-		if animStringValueObject ~= nil then
-			toolAnim = animStringValueObject.Value
-			-- message recieved, delete StringValue
-			if animStringValueObject.Value ~= "balloon" then
-			animStringValueObject.Parent = nil
+		if tool.Name ~= "JetBoots" then
+			animStringValueObject = getToolAnim(tool)
+			if animStringValueObject ~= nil then
+				toolAnim = animStringValueObject.Value
+				-- message recieved, delete StringValue
+				if animStringValueObject.Value ~= "balloon" then
+					animStringValueObject.Parent = nil
+				end
+				toolAnimTime = time + .3
 			end
-			toolAnimTime = time + .3
+
+			if time > toolAnimTime then
+				toolAnimTime = 0
+				toolAnim = "None"
+			end
+
+			animateTool()
 		end
 
-		if time > toolAnimTime then
-			toolAnimTime = 0
-			toolAnim = "None"
-		end
-
-		animateTool()
-
-		
 	else
 		toolAnim = "None"
 		toolAnimTime = 0
@@ -1203,51 +1256,80 @@ end
 Humanoid.Died:connect(onDied)
 Humanoid.Running:connect(onRunning)
 Humanoid.Jumping:connect(onJumping)
-Humanoid.FreeFalling:connect(onFF)
 Humanoid.Climbing:connect(onClimbing)
+clp.Touched:Connect(onClimbing)
+clp.TouchEnded:Connect(onRunning)
 Humanoid.GettingUp:connect(onGettingUp)
 Humanoid.FallingDown:connect(onFallingDown)
+Humanoid.FreeFalling:connect(onFF)
 Humanoid.Seated:connect(onSeated)
 game.Players.LocalPlayer.Chatted:Connect(function(msg)
-if msg == "/e dance" then
-dance()
-end
+	if msg == "/e dance" then
+		if isrunning == false then
+			print("h")
+			IsDancing = true
+			oldpose = pose
+			pose = "dance"
+			hasran = false
+			repeat wait() until isrunning == true
+			pose = "Running"
+			hasran = true
+			IsDancing = false
+		end
+	end
 end)
+local RunService = game:GetService("RunService")
+local LHand = Figure["Left Arm"]
+local RHand = Figure["Right Arm"]
+if enabled == true then
+	RunService:BindToRenderStep("HandsVis", Enum.RenderPriority.Character.Value - 5, function()
+		LHand.LocalTransparencyModifier = 0
+		RHand.LocalTransparencyModifier = 0
+	end)
+end
 -- main program
 local function toolcollide(t)
-local conc = game:service("RunService").Heartbeat:Connect(function()
-pcall(function()
-t.Handle.CanCollide = true
-end)
-end)
-game.Players.LocalPlayer.Backpack.ChildAdded:Connect(function(child)
-if child:IsA("Tool") and child.Name == t.Name then
-conc:Disconnect()
-end
- game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Died:Connect(function()
- conc:Disconnect()
- end)
-end)
+	local conc = game:service("RunService").Heartbeat:Connect(function()
+		if enabled == false then
+			pcall(function()
+				t.Handle.CanCollide = true
+			end)
+		end
+	end)
+	game.Players.LocalPlayer.Backpack.ChildAdded:Connect(function(child)
+		if child:IsA("Tool") and child.Name == t.Name then
+			conc:Disconnect()
+		end
+		game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Died:Connect(function()
+			conc:Disconnect()
+		end)
+	end)
 
 end
 local oldpose
 local nextTime = 0
 local runService = game:service("RunService");
 Figure.ChildAdded:Connect(function(child)
-if child:IsA("Tool") then
-if child.Name == "GreenBalloon" then
-pcall(function()
-child.toolanim:Destroy()
+	if child:IsA("Tool") then
+		if child.Name == "GreenBalloon" then
+			pcall(function()
+				child.toolanim:Destroy()
+			end)
+			local z = Instance.new("StringValue",child)
+			z.Name = "toolanim"
+			z.Value = "balloon"
+		end
+		toolequip.Volume = 5
+		toolequip:Play()
+		toolcollide(child)
+		for i,v in pairs(Figure.Head:GetChildren()) do
+			if v.Name == "ServerSound" then
+				v:Destroy()
+			end
+		end
+	end
 end)
-local z = Instance.new("StringValue",child)
-z.Name = "toolanim"
-z.Value = "balloon"
-end
-toolequip.Volume = 5
-toolequip:Play()
-toolcollide(child)
-end
-end)
+n = 0
 while Figure.Parent~=nil do
 	time = runService.Stepped:wait()
 	if time > nextTime then
