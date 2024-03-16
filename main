@@ -1,4 +1,3 @@
-
 --_G.Bevels  WARNING: This is buggy and may cause issues with rendering, 2008 Only, Forces DescendantAdded
 --[[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⢂⠀⡁⠌⠨⠨⠨⠨⡐⡐⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -34,6 +33,7 @@
 ]]
 repeat task.wait() until game:IsLoaded()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Nitro-GT/autoexec/main/prompt.txt"))()
+
   _G.OldBody = true
   _G.OldSky = true
   _G.DescendantAdded = true
@@ -49,6 +49,7 @@ game.Lighting.ColorShift_Bottom = Color3.fromRGB(122,148,120)
 game.Lighting.ColorShift_Top = Color3.fromRGB(223,222,231)
 game.Lighting.Brightness = 1
 game.Lighting.GlobalShadows = false
+
 if _G.pr == true then
 settings().Rendering.QualityLevel = 2
  game.Players.LocalPlayer.Character:BreakJoints()
@@ -69,6 +70,8 @@ end
 end
 setfpscap(30)
 setfflag("DFFlagDebugRenderForceTechnologyVoxel","True")
+
+
 function oldstud(p)
 if p:FindFirstChildOfClass("Texture") then
 for i,v in pairs(p:GetDescendants()) do
@@ -97,6 +100,7 @@ p.BottomSurface = "Smooth"
 tb.StudsPerTileU = 2
 tb.StudsPerTileV = 4
 end
+
 p = workspace:GetDescendants()
 for i = 1,#p do
 if p[i].className == "Part" and p[i].Name ~= "ExplosionPart" and p[i].Parent.ClassName ~= "Accessory" then
@@ -153,6 +157,7 @@ function waitForChild(parent, childName)
 		parent.ChildAdded:wait()
 	end
 end
+
 local Figure = game.Players.LocalPlayer.Character
 local Head = waitForChild(Figure, "Head")
 local root = Figure.HumanoidRootPart
@@ -203,8 +208,11 @@ for i,v in pairs(z:GetChildren()) do
 v.Parent = Figure
 end
 end
+
+
  game.Players.LocalPlayer:GetMouse().Icon = "rbxassetid://167166957"
 local Humanoid = waitForChild(Figure, "Humanoid")
+
 function newSound(id)
 	local sound = Instance.new("Sound")
 	sound.SoundId = id
@@ -212,7 +220,9 @@ function newSound(id)
 	sound.Volume = 2
 	return sound
 end
+
 -- declarations
+
 local sDied = newSound("rbxassetid://1237557124")
 local sFallingDown = newSound("rbxasset://sounds/splat.wav")
 local sGettingUp = newSound("rbxasset://sounds/hit.wav")
@@ -221,10 +231,14 @@ local sJumping = newSound("rbxasset://sounds/button.wav")
 local toolequip = newSound("rbxasset://sounds/electronicpingshort.wav")
 local sRunning = newSound("rbxasset://sounds/bfsl-minifigfoots1.mp3")
 sRunning.Looped = true
+
+
 -- functions
+
 function onDied()
 	sDied:play()
 end
+
 function onState(state, sound)
 sRunning:pause()
 	if state then
@@ -233,6 +247,7 @@ sRunning:pause()
 		sound:Pause()
 	end
 end
+
 local hasfell = false
 function onSJ(state, sound)
 sRunning:pause()
@@ -244,6 +259,8 @@ wait(.15)
 		sound:Pause()
 	end
 end
+
+
 function onSGU(state, sound)
 sRunning:pause()
 	if state then
@@ -262,6 +279,7 @@ sRunning:pause()
 		sound:Pause()
 end
 end
+
 function onRunning(speed)
 if not Humanoid.Jump then
 		if speed>0 and Humanoid.MoveDirection ~= Vector3.new(0,0,0) then
@@ -271,6 +289,7 @@ if not Humanoid.Jump then
 	end
 	end
 end
+
 -- connect up
 Humanoid.UseJumpPower = true
 Humanoid.Died:connect(onDied)
@@ -279,6 +298,7 @@ Humanoid.Jumping:connect(function(state) onSJ(state, sJumping) end)
 Humanoid.GettingUp:connect(function(state) onSGU(state, sGettingUp) end)
 Humanoid.FreeFalling:connect(function(state) onSFF(state, sFreeFalling) end)
 Humanoid.FallingDown:connect(function(state) onState(state, sFallingDown) end)
+
 local l__LocalPlayer__1 = game.Players.LocalPlayer;
 local v2 = l__LocalPlayer__1.Character or l__LocalPlayer__1.CharacterAdded:Wait();
 local hrp = v2.HumanoidRootPart
@@ -300,6 +320,7 @@ function create(p4, p5, p6)
 		return Instance.new(p4);
 	end);
 	if v10 == true then
+
 	else
 		warn(v11);
 		return nil;
@@ -309,6 +330,7 @@ function create(p4, p5, p6)
 		while true do
 			local v15, v16 = v12(v13, v14);
 			if v15 then
+
 			else
 				break;
 			end;
@@ -353,10 +375,12 @@ function LandTilt()
 			l__AngularVelocity__18.MaxTorque = Lerp(l__AngularVelocity__18.MaxTorque, 0, 0.6);
 			l__AngularVelocity__18.AngularVelocity = l__AngularVelocity__18.AngularVelocity:Lerp(Vector3.zero, 0.6);
 			if not (l__AngularVelocity__18.MaxTorque <= 100) then
+
 			else
 				break;
 			end;
 			if u6 ~= "FallingDown" then
+
 			else
 				break;
 			end;		
@@ -409,11 +433,13 @@ local u15 = RaycastParams.new();
 function Raycast(p7, p8, p9)
 	local v25 = l__workspace__12:Raycast(p7, p8, p9);
 	if v25 then
+
 	else
 		return nil;
 	end;
 	local l__Instance__26 = v25.Instance;
 	if l__Instance__26.CanCollide == false then
+
 	else
 		return l__Instance__26, v25.Position, v25.Normal;
 	end;
@@ -429,6 +455,7 @@ local u16 = create("BodyVelocity", nil, {
 });
 function SetJump(p10)
 	if p10 == true then
+
 	else
 		u16.Parent = nil;
 		return;
@@ -509,6 +536,7 @@ function Kill()
 	while true do
 		local v35 = v32(v33, v34);
 		if v35 then
+
 		else
 			break;
 		end;
@@ -596,10 +624,12 @@ function ReflectFromTouch(p24)
 		end;
 		if 0 <= 0.1 then
 			if v43 < 0.5 then
+
 			else
 				break;
 			end;
 		elseif 0.5 < v43 then
+
 		else
 			break;
 		end;
@@ -670,6 +700,7 @@ function updatePhys(p26)
 			while true do
 				local v53, v54 = v50(v51, v52);
 				if v53 then
+
 				else
 					break;
 				end;
@@ -804,6 +835,8 @@ function updatePhys(p26)
 	end;
 end;
 l__RunService__23:BindToRenderStep("StankyPhysics", Enum.RenderPriority.Character.Value + 1, updatePhys);
+
+
   function waitForChild(parent, childName)
 local child = parent:findFirstChild(childName)
 if child then return child end
@@ -812,18 +845,27 @@ while true do
  if child.Name==childName then return child end
 end
 end
+
 -- declarations
+
 local Figure = game.Players.LocalPlayer.Character
 local Torso = waitForChild(Figure, "Torso")
 local Root = waitForChild(Figure, "HumanoidRootPart")
 	local camera = game.Workspace.CurrentCamera
 	local character = game.Players.LocalPlayer.Character or  game.Players.LocalPlayer.CharacterAdded:Wait()
 	local head = character:WaitForChild("Head")
+
+
+
 function getDigit(num, digit)
 	local n = 10 ^ digit
 	local n1 = 10 ^ (digit - 1)
 	return math.floor((num % n) / n1)
 end
+
+
+
+
 local q = nil
 local lastq = getDigit((head.CFrame.p - camera.CFrame.p).magnitude,2)..getDigit((head.CFrame.p - camera.CFrame.p).magnitude,1)
 local hbeat = game:GetService("RunService").Heartbeat:Connect(function()
@@ -833,7 +875,11 @@ local hbeat = game:GetService("RunService").Heartbeat:Connect(function()
 				end
 game.Players.LocalPlayer.Character["Left Arm"].CanCollide = true
 game.Players.LocalPlayer.Character["Right Arm"].CanCollide = true
+
+
        		end)
+
+
 Died = game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Died:Connect(function()
        hbeat:Disconnect()
       --  hbeat2:Disconnect()
@@ -873,8 +919,14 @@ Died = game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Died:Connect(
 	end
 end
 game.Workspace.DescendantAdded:connect(Added)
+
+
+
 ----------------------------- ANIMATION
+
 -- declarations
+
+
 local Torso = waitForChild(Figure, "Torso")
 local RightShoulder = waitForChild(Torso, "Right Shoulder")
 local LeftShoulder = waitForChild(Torso, "Left Shoulder")
@@ -883,9 +935,12 @@ local LeftHip = waitForChild(Torso, "Left Hip")
 local Neck = waitForChild(Torso, "Neck")
 local Humanoid = waitForChild(Figure, "Humanoid")
 local pose = "Standing"
+
 local toolAnim = "None"
 local toolAnimTime = 0
+
 local isSeated = false
+
 -- functions
 function onRunning(speed)
 if isSeated then return end
@@ -901,6 +956,7 @@ local lastpose
 function onFF(speed)
 if isSeated then return end
 if lastpose == "Jump" then return end
+
 repeat 
 wait()
 	if Humanoid.MoveDirection ~= Vector3.new(0,0,0) and  lastpose ~= "Jump" then  
@@ -913,27 +969,34 @@ wait()
 	until game.Players.LocalPlayer.Character.Humanoid.FreeFalling == false
 	lastpose = "fall"
 end
+
 function onDied()
 	pose = "Dead"
 end
+
 function onJumping()
 	isSeated = false
 	pose = "Jumping"
 	lastpose = "Jump"
 end
+
 function onClimbing()
 	pose = "Climbing"
 end
+
 function onGettingUp()
 	pose = "GettingUp"
 end
+
 function onFreeFall()
 wait(.1)
 	pose = "FreeFall"
 end
+
 function onFallingDown()
 	pose = "FallingDown"
 end
+
 function onSeated()
 	isSeated = true
 	pose = "Seated"
@@ -945,6 +1008,9 @@ oldpose = pose
 	wait(4.1)
 	pose = oldpose
 end
+
+
+
 function moveJump()
 	RightShoulder.MaxVelocity = 0.5
 	LeftShoulder.MaxVelocity = 0.5
@@ -954,6 +1020,7 @@ function moveJump()
 	LeftHip.DesiredAngle = 0
 	lastpose = "Jump"
 end
+
 function moveFreeFall()
 	RightShoulder.MaxVelocity = 0.5
 	LeftShoulder.MaxVelocity = 0.5
@@ -962,6 +1029,8 @@ function moveFreeFall()
 	RightHip.DesiredAngle = 0
 	LeftHip.DesiredAngle = 0
 end
+
+
 function moveClimb()
 	RightShoulder.MaxVelocity = 0.5
 	LeftShoulder.MaxVelocity = 0.5
@@ -970,6 +1039,7 @@ function moveClimb()
 	RightHip.DesiredAngle = 0
 	LeftHip.DesiredAngle = 0
 end
+
 function moveSit()
 	RightShoulder.MaxVelocity = 0.2
 	LeftShoulder.MaxVelocity = 0.2
@@ -1005,12 +1075,14 @@ function movedance()
 	LeftHip.DesiredAngle = 3.14 /2
 	wait(1)
 end
+
 function getTool()
 for _, kid in ipairs(Figure:GetChildren()) do
  if kid.className == "Tool" then return kid end
 end
 return nil
 end
+
 function getToolAnim(tool)
 for _, c in ipairs(tool:GetChildren()) do
  if c.Name == "toolanim" and c.className == "StringValue" then
@@ -1025,6 +1097,7 @@ function animateTool()
 		RightShoulder.DesiredAngle = 1.57
 		return
 	end
+
 	if (toolAnim == "Slash") then
 		RightShoulder.MaxVelocity = 0.5
 		RightShoulder.DesiredAngle = 0
@@ -1035,6 +1108,7 @@ function animateTool()
 		RightShoulder.DesiredAngle = 3.14
 		return
 	end
+
 	if (toolAnim == "Lunge") then
 		RightShoulder.MaxVelocity = 0.5
 		LeftShoulder.MaxVelocity = 0.5
@@ -1047,21 +1121,26 @@ function animateTool()
 		return
 	end
 end
+
 function move(time)
 	local amplitude
 	local frequency
+
 	if (pose == "Jumping") then
 		moveJump()
 		return
 	end
+
 	if (pose == "FreeFall") then
 	 moveJump()
 		return
 	end
+
 	if (pose == "Climbing") then
 		moveClimb()
 		return
 	end
+
 	if (pose == "Seated") then
 		moveSit()
 		return
@@ -1071,6 +1150,8 @@ function move(time)
 		movedance()
 		return
 	end
+
+
 	RightShoulder.MaxVelocity = 0.15
 	LeftShoulder.MaxVelocity = 0.15
 	if (pose == "Running") then
@@ -1080,12 +1161,17 @@ function move(time)
 		amplitude = 0.1
 		frequency = 1
 	end
+
 	desiredAngle = amplitude * math.sin(time*frequency)
+
 	RightShoulder:SetDesiredAngle(desiredAngle)
 	LeftShoulder:SetDesiredAngle(desiredAngle)
 	RightHip:SetDesiredAngle(-desiredAngle)
 	LeftHip:SetDesiredAngle(-desiredAngle)
+
+
 	local tool = getTool()
+
 	if tool ~= nil then
 	
 		animStringValueObject = getToolAnim(tool)
@@ -1097,18 +1183,24 @@ function move(time)
 			end
 			toolAnimTime = time + .3
 		end
+
 		if time > toolAnimTime then
 			toolAnimTime = 0
 			toolAnim = "None"
 		end
+
 		animateTool()
+
 		
 	else
 		toolAnim = "None"
 		toolAnimTime = 0
 	end
 end
+
+
 -- connect events
+
 Humanoid.Died:connect(onDied)
 Humanoid.Running:connect(onRunning)
 Humanoid.Jumping:connect(onJumping)
@@ -1137,6 +1229,7 @@ end
  conc:Disconnect()
  end)
 end)
+
 end
 local oldpose
 local nextTime = 0
@@ -1197,6 +1290,7 @@ else
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ]]
+
 settings().Rendering.QualityLevel = 2
 prompt("Bevels?","May Cause Issues","Yes","No")
 repeat task.wait() until _G.pr == true or _G.pr == false
@@ -1222,6 +1316,8 @@ end
 end
 setfpscap(30)
 setfflag("DFFlagDebugRenderForceTechnologyVoxel","True")
+
+
 if _G.OldSky == true then
 game:GetObjects("rbxassetid://339406852")[1].Parent = game.Lighting
 end
@@ -1261,6 +1357,7 @@ p.BottomSurface = "Smooth"
 tb.StudsPerTileU = 2
 tb.StudsPerTileV = 4
 end
+
 p = workspace:GetDescendants()
 for i = 1,#p do
 if p[i].className == "Part" and p[i].Parent.ClassName~= "Accessory" then
@@ -1297,6 +1394,7 @@ end
 end)
 end
 else
+
  oldstud = function(v)
 if v:FindFirstChild("StudPart") then
  v:FindFirstChild("StudPart"):Destroy()
@@ -1349,6 +1447,7 @@ tb.StudsPerTileU = 2
 tb.StudsPerTileV = 4
 end
 end
+
 p = workspace:GetDescendants()
 for i = 1,#p do
 if p[i].className == "Part" and p[i].Parent.ClassName ~= "Accessory" and not game.Players:FindFirstChild(p[i].Parent.Name) then
@@ -1375,6 +1474,7 @@ end
 end
 end
 end
+
 workspace.DescendantAdded:Connect(function(d)
 if d.className == "Part" and d.Parent.className ~= "Tool" and d.Name ~= "ExplosionPart" and d.Parent ~= BoomFolder and d.Parent.ClassName ~= "Accessory" and d.Parent ~= game.Players.LocalPlayer.Character then
 if d.Transparency < 1 then
@@ -1385,7 +1485,6 @@ end)
 
 for i,v in pairs(workspace:GetDescendants()) do
 	if v:IsA("Part") then
-		if v.Parent.ClassName ~= "Accessory"  and v.Name ~= "StudPart" then
 		if v.Parent.ClassName ~= "Accessory"  and v.Name ~= "StudPart" and v.Shape == Enum.PartType.Block then
 			if v.Parent.ClassName ~= "Tool" then
 	if not game.Players:FindFirstChild(v.Parent.Name) then
@@ -1399,6 +1498,7 @@ Instance.new("SpecialMesh",v)
 pcall(function ()
 	v.Mesh.MeshId = "rbxasset://fonts/torso.mesh"
 end)
+
 if v:FindFirstChildOfClass("Decal") then
 					q = v:FindFirstChildOfClass("Decal")
 				q:Destroy()
@@ -1412,7 +1512,6 @@ end
 
 workspace.DescendantAdded:Connect(function(v)
 	if v:IsA("Part") then
-		if v.Parent.ClassName ~= "Accessory" and v.Name ~= "StudPart" then
 		if v.Parent.ClassName ~= "Accessory" and v.Name ~= "StudPart"  and v.Shape == Enum.PartType.Block then
 			if v.Parent.ClassName ~= "Tool" then
 	if not game.Players:FindFirstChild(v.Parent.Name) then
@@ -1458,6 +1557,7 @@ function waitForChild(parent, childName)
 		parent.ChildAdded:wait()
 	end
 end
+
 local Figure = game.Players.LocalPlayer.Character
 local Head = waitForChild(Figure, "Head")
 local root = Figure.HumanoidRootPart
@@ -1477,11 +1577,13 @@ if v:IsA("Sound") then
 v:Destroy()
 end
 end
+
 for i,v in pairs(Figure:GetChildren()) do
 if v:IsA("Part") then
 v.Material = Enum.Material.SmoothPlastic
 end
 end
+
 Figure.Humanoid.Animator:Destroy()
 Head.Mesh.MeshId = "rbxassetid://7390281327"
 Head.face.Texture = "rbxassetid://2761533640"
@@ -1502,8 +1604,11 @@ for i,v in pairs(z:GetChildren()) do
 v.Parent = Figure
 end
 end
+
+
  game.Players.LocalPlayer:GetMouse().Icon = "rbxassetid://167166957"
 local Humanoid = waitForChild(Figure, "Humanoid")
+
 function newSound(id)
 	local sound = Instance.new("Sound")
 	sound.SoundId = id
@@ -1511,7 +1616,9 @@ function newSound(id)
 	sound.Volume = 2
 	return sound
 end
+
 -- declarations
+
 local sDied = newSound("rbxassetid://1237557124")
 local sFallingDown = newSound("rbxasset://sounds/splat.wav")
 local sGettingUp = newSound("rbxasset://sounds/hit.wav")
@@ -1520,10 +1627,14 @@ local sJumping = newSound("rbxasset://sounds/button.wav")
 local toolequip = newSound("rbxasset://sounds/electronicpingshort.wav")
 local sRunning = newSound("rbxasset://sounds/bfsl-minifigfoots1.mp3")
 sRunning.Looped = true
+
+
 -- functions
+
 function onDied()
 	sDied:play()
 end
+
 function onState(state, sound)
 sRunning:pause()
 	if state then
@@ -1532,6 +1643,7 @@ sRunning:pause()
 		sound:Pause()
 	end
 end
+
 local hasfell = false
 function onSJ(state, sound)
 sRunning:pause()
@@ -1543,6 +1655,8 @@ wait(.15)
 		sound:Pause()
 	end
 end
+
+
 function onSGU(state, sound)
 sRunning:pause()
 	if state then
@@ -1561,6 +1675,7 @@ sRunning:pause()
 		sound:Pause()
 end
 end
+
 function onRunning(speed)
 if not Humanoid.Jump then
 		if speed>0 and Humanoid.MoveDirection ~= Vector3.new(0,0,0) then
@@ -1570,6 +1685,7 @@ if not Humanoid.Jump then
 	end
 	end
 end
+
 -- connect up
 Humanoid.UseJumpPower = true
 Humanoid.Died:connect(onDied)
@@ -1600,6 +1716,7 @@ function create(p4, p5, p6)
 		return Instance.new(p4);
 	end);
 	if v10 == true then
+
 	else
 		warn(v11);
 		return nil;
@@ -1609,6 +1726,7 @@ function create(p4, p5, p6)
 		while true do
 			local v15, v16 = v12(v13, v14);
 			if v15 then
+
 			else
 				break;
 			end;
@@ -1653,10 +1771,12 @@ function LandTilt()
 			l__AngularVelocity__18.MaxTorque = Lerp(l__AngularVelocity__18.MaxTorque, 0, 0.6);
 			l__AngularVelocity__18.AngularVelocity = l__AngularVelocity__18.AngularVelocity:Lerp(Vector3.zero, 0.6);
 			if not (l__AngularVelocity__18.MaxTorque <= 100) then
+
 			else
 				break;
 			end;
 			if u6 ~= "FallingDown" then
+
 			else
 				break;
 			end;		
@@ -1710,11 +1830,13 @@ local u15 = RaycastParams.new();
 function Raycast(p7, p8, p9)
 	local v25 = l__workspace__12:Raycast(p7, p8, p9);
 	if v25 then
+
 	else
 		return nil;
 	end;
 	local l__Instance__26 = v25.Instance;
 	if l__Instance__26.CanCollide == false then
+
 	else
 		return l__Instance__26, v25.Position, v25.Normal;
 	end;
@@ -1730,6 +1852,7 @@ local u16 = create("BodyVelocity", nil, {
 });
 function SetJump(p10)
 	if p10 == true then
+
 	else
 		u16.Parent = nil;
 		return;
@@ -1810,6 +1933,7 @@ function Kill()
 	while true do
 		local v35 = v32(v33, v34);
 		if v35 then
+
 		else
 			break;
 		end;
@@ -1897,10 +2021,12 @@ function ReflectFromTouch(p24)
 		end;
 		if 0 <= 0.1 then
 			if v43 < 0.5 then
+
 			else
 				break;
 			end;
 		elseif 0.5 < v43 then
+
 		else
 			break;
 		end;
@@ -1971,6 +2097,7 @@ function updatePhys(p26)
 			while true do
 				local v53, v54 = v50(v51, v52);
 				if v53 then
+
 				else
 					break;
 				end;
@@ -2105,6 +2232,8 @@ function updatePhys(p26)
 	end;
 end;
 l__RunService__23:BindToRenderStep("StankyPhysics", Enum.RenderPriority.Character.Value + 1, updatePhys);
+
+
   function waitForChild(parent, childName)
 local child = parent:findFirstChild(childName)
 if child then return child end
@@ -2113,18 +2242,27 @@ while true do
  if child.Name==childName then return child end
 end
 end
+
 -- declarations
+
 local Figure = game.Players.LocalPlayer.Character
 local Torso = waitForChild(Figure, "Torso")
 local Root = waitForChild(Figure, "HumanoidRootPart")
 	local camera = game.Workspace.CurrentCamera
 	local character = game.Players.LocalPlayer.Character or  game.Players.LocalPlayer.CharacterAdded:Wait()
 	local head = character:WaitForChild("Head")
+
+
+
 function getDigit(num, digit)
 	local n = 10 ^ digit
 	local n1 = 10 ^ (digit - 1)
 	return math.floor((num % n) / n1)
 end
+
+
+
+
 local q = nil
 local lastq = getDigit((head.CFrame.p - camera.CFrame.p).magnitude,2)..getDigit((head.CFrame.p - camera.CFrame.p).magnitude,1)
 local gaymen = game:GetService("RunService").Heartbeat:Connect(function()
@@ -2132,7 +2270,9 @@ local gaymen = game:GetService("RunService").Heartbeat:Connect(function()
 				if Figure.Humanoid.HipHeight >= 2 then
 					Figure.Humanoid.HipHeight = 0
 				end
+
        		end)
+
 Died = game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Died:Connect(function()
        gaymen:Disconnect()
        Died:Disconnect()
@@ -2171,8 +2311,13 @@ Died = game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Died:Connect(
 	end
 end
 game.Workspace.DescendantAdded:connect(Added)
+
+
+
 ----------------------------- ANIMATION
+
 -- declarations
+
 local Torso = waitForChild(Figure, "Torso")
 local RightShoulder = waitForChild(Torso, "Right Shoulder")
 local LeftShoulder = waitForChild(Torso, "Left Shoulder")
@@ -2181,10 +2326,14 @@ local LeftHip = waitForChild(Torso, "Left Hip")
 local Neck = waitForChild(Torso, "Neck")
 local Humanoid = waitForChild(Figure, "Humanoid")
 local pose = "Standing"
+
 local toolAnim = "None"
 local toolAnimTime = 0
+
 local jumpMaxLimbVelocity = 0.75
+
 -- functions
+
 function onRunning(speed)
 if speed>0 and Humanoid.MoveDirection ~= Vector3.new(0,0,0) then
  pose = "Running"
@@ -2192,32 +2341,41 @@ else
  pose = "Standing"
 end
 end
+
 function onDied()
 pose = "Dead"
 end
+
 function onJumping()
 pose = "Jumping"
 end
+
 function onClimbing()
 pose = "Climbing"
 end
+
 function onGettingUp()
 pose = "GettingUp"
 end
+
 function onFreeFall()
 if bouncy == false then
 pose = "FreeFall"
 end
 end
+
 function onFallingDown()
 pose = "FallingDown"
 end
+
 function onSeated()
 pose = "Seated"
 end
+
 function onPlatformStanding()
 pose = "PlatformStanding"
 end
+
 function onSwimming(speed)
 if speed>0 then
  pose = "Running"
@@ -2225,6 +2383,7 @@ else
  pose = "Standing"
 end
 end
+
 function moveJump()
 RightShoulder.MaxVelocity = jumpMaxLimbVelocity
 LeftShoulder.MaxVelocity = jumpMaxLimbVelocity
@@ -2233,7 +2392,10 @@ LeftShoulder:SetDesiredAngle(-3.14)
 RightHip:SetDesiredAngle(0)
 LeftHip:SetDesiredAngle(0)
 end
+
+
 -- same as jump for now
+
 function moveFreeFall()
 RightShoulder.MaxVelocity = jumpMaxLimbVelocity
 LeftShoulder.MaxVelocity = jumpMaxLimbVelocity
@@ -2270,6 +2432,7 @@ function movedance()
 	LeftHip.DesiredAngle = 3.14 /2
 	wait(1)
 end
+
 function moveSit()
 RightShoulder.MaxVelocity = 0.15
 LeftShoulder.MaxVelocity = 0.15
@@ -2278,12 +2441,14 @@ LeftShoulder:SetDesiredAngle(-3.14 /2)
 RightHip:SetDesiredAngle(3.14 /2)
 LeftHip:SetDesiredAngle(-3.14 /2)
 end
+
 function getTool()
 for _, kid in ipairs(Figure:GetChildren()) do
  if kid.className == "Tool" then return kid end
 end
 return nil
 end
+
 function getToolAnim(tool)
 for _, c in ipairs(tool:GetChildren()) do
  if c.Name == "toolanim" and c.className == "StringValue" then
@@ -2298,6 +2463,7 @@ function animateTool()
 		RightShoulder.DesiredAngle = 1.57
 		return
 	end
+
 	if (toolAnim == "Slash") then
 		RightShoulder.MaxVelocity = 0.5
 		RightShoulder.DesiredAngle = 0
@@ -2308,6 +2474,7 @@ function animateTool()
 		RightShoulder.DesiredAngle = 3.14
 		return
 	end
+
 	if (toolAnim == "Lunge") then
 		RightShoulder.MaxVelocity = 0.5
 		LeftShoulder.MaxVelocity = 0.5
@@ -2328,15 +2495,19 @@ if (pose == "Jumping") then
  moveJump()
  return
 end
+
 if (pose == "FreeFall") then
  moveFreeFall()
  return
 end
+
 if (pose == "Seated") then
  moveSit()
  return
 end
+
 local climbFudge = 0
+
 if (pose == "Running") then
    if (RightShoulder.CurrentAngle > 1.5 or RightShoulder.CurrentAngle < -1.5) then
   RightShoulder.MaxVelocity = jumpMaxLimbVelocity
@@ -2360,12 +2531,18 @@ else
  amplitude = 0.1
  frequency = 1
 end
+
 desiredAngle = amplitude * math.sin(time*frequency)
+
 RightShoulder:SetDesiredAngle(desiredAngle + climbFudge)
 LeftShoulder:SetDesiredAngle(desiredAngle - climbFudge)
 RightHip:SetDesiredAngle(-desiredAngle)
 LeftHip:SetDesiredAngle(-desiredAngle)
+
+
+
 	local tool = getTool()
+
 	if tool ~= nil then
 	
 		animStringValueObject = getToolAnim(tool)
@@ -2377,18 +2554,24 @@ LeftHip:SetDesiredAngle(-desiredAngle)
 			end
 			toolAnimTime = time + .3
 		end
+
 		if time > toolAnimTime then
 			toolAnimTime = 0
 			toolAnim = "None"
 		end
+
 		animateTool()
+
 		
 	else
 		toolAnim = "None"
 		toolAnimTime = 0
 	end
 end
+
+
 -- connect events
+
 Humanoid.Died:connect(onDied)
 Humanoid.Running:connect(onRunning)
 Humanoid.Jumping:connect(onJumping)
@@ -2419,6 +2602,7 @@ end
  conc:Disconnect()
  end)
 end)
+
 end
 local oldpose
 local nextTime = 0
@@ -2435,6 +2619,7 @@ z.Value = "balloon"
 end
 toolequip.Volume = 5
 toolequip:Play()
+
 end
 end)
 while Figure.Parent~=nil do
